@@ -1,29 +1,47 @@
-package com.example.demo.controller;
+package com.example.spring_boot_app;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
 
+import com.example.spring_boot_app.SupabaseAuthService;
+import com.example.spring_boot_app.AuthRequest;
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final SupabaseAuthService supabaseAuthService;
+    @Autowired
+    private SupabaseAuthService supabaseAuthService;
 
-    public AuthController(SupabaseAuthService supabaseAuthService) {
-        this.supabaseAuthService = supabaseAuthService;
+    /**
+     * アカウント登録を行います
+     * @param request アカウント情報
+     * @param uriBuilder URI構築
+     * @return 実行結果
+     */
+    @PostMapping("/register")
+    public ResponseEntity<Map<String, Object>> register(@RequestBody AuthRequest request, UriComponentsBuilder uriBuilder) {
+        String redirectTo = uriBuilder.replacePath("/").build().toUriString();
+        Map<String, Object> result = supabaseAuthService.signUp(request.getEmail(), request.getPassword(), redirectTo);
+        return result.containsKey("id") 
+                ? ResponseEntity.ok(Map.of("message", "Registration successful. Please check your email for confirmation."))
+                : ResponseEntity.badRequest().body(result);
     }
 
     /**
-     * ログインを行います
-     * @param request アカウント情報
-     * @return 実行結果
+     * アカウント情報を取得します
+     * @param authorizationHeader Authorizationヘッダ
+     * @return アカウント情報
      */
-    @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody AuthRequest request) {
-        Map<String, Object> result = supabaseAuthService.loginWithPassword(request.getEmail(), request.getPassword());
-        return result.containsKey("access_token")
-                ? ResponseEntity.ok(result)
-                : ResponseEntity.badRequest().body(result);
+    @GetMapping("/user")
+    public ResponseEntity<Map<String, Object>> authUser(@RequestHeader("Authorization") String authorizationHeader) {
+        Map<String, Object> user = supabaseAuthService.getUserByAccessToken(authorizationHeader.substring(7));
+        return ResponseEntity.ok(Map.of("email", user.get("email")));
     }
+
 }
