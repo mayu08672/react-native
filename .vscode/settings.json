@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./flask-app/src",
+        "./flask-app/src",
+        "./flask-app/src",
+        "./flask-app/src"
+    ]
+}
