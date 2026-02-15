@@ -19,6 +19,5 @@ echo "--- Running post-create-command.sh ---"
 echo "--- Installing Python dependencies... ---"
 pip install --user -r flask-app/requirements.txt
 
-
 # --- スクリプト終了 ---
 echo "--- Setup completed successfully! ---"
