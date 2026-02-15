@@ -11,9 +11,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import static org.springframework.security.config.Customizer.withDefaults;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
-
 
 @Configuration
 @EnableWebSecurity
@@ -29,9 +26,11 @@ public class SecurityConfig {
      * @param http HttpSecurity設定オブジェクト
      * @return SecurityFilterChain
      */
-        @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(withDefaults())
+            .csrf(csrf -> csrf.disable())            
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(
                         "/", "/*.html", "/*.css", "/*.js", "/favicon.ico"
@@ -64,10 +63,5 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-        @Autowired
-    private SupabaseAuthFilter supabaseAuthFilter;
-   
-   
-
 }
  
