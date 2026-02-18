@@ -26,6 +26,9 @@ def register() -> Response:
     return jsonify(supabase_result), 400
 
 # 認証ユーザ情報取得
+
+ 
+
 @bp_auth.route("/api/auth/user")
 def auth_user() -> Response:
     auth_header : str = request.headers.get("Authorization", "")
@@ -60,3 +63,10 @@ def base_host_url() -> str:
               or request.scheme)
     logger.info("base_host_url host=%s scheme=%s", host, scheme)
     return f"{scheme}://{host}/"
+
+ # GitHub認証リダイレクト
+@bp_auth.route("/api/auth/oauth2/github")
+def redirect_to_github() -> Response:
+    redirect_to : str = base_host_url()
+    github_url : str = supabase_auth_service.get_github_signin_url(redirect_to=redirect_to)
+    return redirect(github_url)

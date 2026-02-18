@@ -21,4 +21,4 @@ public class WebClientConfig {
                 .defaultHeader("apikey", supabaseAnonKey)
                 .build();
     }
-}   
+}

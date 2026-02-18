@@ -14,6 +14,7 @@ echo "--- Running post-create-command.sh ---"
 
 # --- 実行したいコマンドを追記していきます ---
 
+
 # 以下の 3行を追加、必要なのは pip のところ
 # Python (Flask) の依存関係をインストール
 echo "--- Installing Python dependencies... ---"
