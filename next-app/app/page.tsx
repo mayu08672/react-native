@@ -90,13 +90,13 @@ export default function LoginPage() {
     <div className="w-full flex items-center justify-center mt-24 px-4">
       <Card className="w-full max-w-md shadow-xl" variant="outlined">
         <CardContent>
-          <Typography
-            variant="h5"
-            sx={{ mb: 2 }}
-            className="text-center font-bold"
-          >
-            ログイン／新規登録
-          </Typography>
+         <Typography
+  variant="h5"
+  sx={{ mb: 2 }}
+  className="gyaru-login-title"
+>
+  ログイン／新規登録
+</Typography>
 
           <TextField
             label="メールアドレス"

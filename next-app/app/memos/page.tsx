@@ -111,9 +111,9 @@ export default function MemosPage() {
   return (
     <div className="max-w-2xl w-full px-4 py-10">
       <div className="flex justify-between items-center mb-4">
-        <Typography variant="h4" className="font-bold">
-          メモ一覧
-        </Typography>
+        <Typography className="gyaru-title sparkle">
+  🌺 メモ一覧 🌺
+</Typography>
         <Button variant="outlined" color="inherit" onClick={logout}>
           ログアウト
         </Button>

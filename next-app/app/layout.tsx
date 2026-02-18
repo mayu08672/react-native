@@ -14,6 +14,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className="bg-gray-50 min-h-screen flex justify-center">
         {children}
+        
       </body>
     </html>
   );

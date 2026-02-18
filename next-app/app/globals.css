@@ -1,29 +1,401 @@
 @import "tailwindcss";
 
+/* =========================
+   平成ギャルカラー
+========================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg1: #ff00aa;
+  --bg2: #ff66cc;
+  --bg3: #000000;
+
+  --text-main: #ffffff;
+  --text-sub: #ffd6f4;
+
+  --card-bg: rgba(0, 0, 0, 0.65);
+
+  --border-pink: #ff00aa;
+
+  --neon-pink: #ff00aa;
+  --neon-purple: #cc00ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =========================
+   背景
+========================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  background:
+    radial-gradient(circle at 20% 20%, #ff66cc 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, #cc00ff 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, #ff00aa 0%, transparent 40%),
+    #000000;
+
+  color: var(--text-main);
+
+  font-family:
+    "MS Gothic",
+    "Yu Gothic",
+    sans-serif;
+
 }
-html, body {
-  height: 100%;
+
+/* =========================
+   メインコンテナ
+========================= */
+
+.app-container {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 40px 16px;
+}
+
+/* =========================
+   カード（平成ギャル風）
+========================= */
+
+.card {
+  background: var(--card-bg);
+
+  border-radius: 8px;
+
+  border: 2px solid var(--border-pink);
+
+  box-shadow:
+    0 0 10px #ff00aa,
+    0 0 20px #ff00aa,
+    inset 0 0 10px rgba(255,0,170,0.5);
+
+  backdrop-filter: blur(6px);
+
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+
+  box-shadow:
+    0 0 20px #ff00aa,
+    0 0 40px #cc00ff;
+}
+
+/* =========================
+   タイトル（ネオン文字）
+========================= */
+
+.gyaru-title {
+
+  font-size: 28px;
+
+  font-weight: bold;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 0 5px #ff00aa,
+    0 0 10px #ff00aa,
+    0 0 20px #cc00ff,
+    0 0 40px #cc00ff;
+
+  letter-spacing: 2px;
+}
+
+/* =========================
+   ボタン（派手）
+========================= */
+
+button {
+
+  background:
+    linear-gradient(
+      180deg,
+      #ff66cc,
+      #ff00aa
+    );
+
+  color: white;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 999px;
+
+  font-weight: bold;
+
+  box-shadow:
+    0 0 10px #ff00aa,
+    0 0 20px #ff00aa;
+
+}
+
+button:hover {
+
+  background:
+    linear-gradient(
+      180deg,
+      #ff00aa,
+      #cc00ff
+    );
+
+  box-shadow:
+    0 0 20px #ff00aa,
+    0 0 40px #cc00ff;
+
+}
+
+/* =========================
+   入力欄
+========================= */
+
+input,
+textarea {
+
+  background: rgba(0,0,0,0.7);
+
+  border: 2px solid #ff00aa;
+
+  border-radius: 6px;
+
+  color: white;
+
+}
+
+input:focus,
+textarea:focus {
+
+  outline: none;
+
+  box-shadow:
+    0 0 10px #ff00aa,
+    0 0 20px #cc00ff;
+
+}
+
+/* =========================
+   スクロールバー
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+
+  background:
+    linear-gradient(
+      #ff00aa,
+      #cc00ff
+    );
+
+}
+
+/* =========================
+   キラキラアニメ
+========================= */
+
+.sparkle {
+
+  animation: sparkle 1.5s infinite alternate;
+
+}
+
+@keyframes sparkle {
+
+  from {
+    text-shadow:
+      0 0 5px #ff00aa,
+      0 0 10px #ff00aa;
+  }
+
+  to {
+    text-shadow:
+      0 0 20px #ff00aa,
+      0 0 40px #cc00ff;
+  }
+
+}
+.gyaru-button {
+  background: linear-gradient(45deg, #ff1493, #ff69b4);
+
+  color: white;
+
+  font-weight: bold;
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 10px #ff69b4,
+    inset 0 0 10px #ffffff;
+
+  border: 2px solid white;
+}
+/* =========================
+   平成ギャルタイトル
+========================= */
+
+.gyaru-title {
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  color: #ff00cc;
+
+  text-align: center;
+
+  letter-spacing: 3px;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff00cc,
+    0 0 20px #ff00cc,
+    0 0 40px #ff66ff;
+}
+
+/* Flash風点滅 */
+
+.flash {
+  animation: flash 1.2s infinite alternate;
+}
+
+@keyframes flash {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+
+/* =========================
+   ギャルカード
+========================= */
+
+.gyaru-card {
+
+  background: linear-gradient(
+    135deg,
+    #000000,
+    #2a002a
+  );
+
+  border: 2px solid #ff00cc;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 10px #ff00cc,
+    0 0 20px #ff66ff;
+
+  color: white;
+}
+
+
+/* =========================
+   ギャルボタン
+========================= */
+
+.gyaru-button {
+
+  background: linear-gradient(
+    90deg,
+    #ff00cc,
+    #ff66ff
+  ) !important;
+
+  color: white !important;
+
+  font-weight: bold !important;
+
+  border-radius: 999px !important;
+
+  box-shadow:
+    0 0 10px #ff00cc;
+
+}
+
+.gyaru-button:hover {
+
+  transform: scale(1.05);
+
+  box-shadow:
+    0 0 20px #ff00cc,
+    0 0 40px #ff66ff;
+}
+
+
+/* アウトライン */
+
+.gyaru-button-outline {
+
+  border: 2px solid #ff00cc !important;
+
+  color: #ff00cc !important;
+
+  border-radius: 999px !important;
+
+}
+
+.gyaru-button-outline:hover {
+
+  background: #ff00cc !important;
+
+  color: white !important;
+
+}
+
+
+/* =========================
+   キラキラ
+========================= */
+
+.sparkle::after {
+
+  content: " ✨";
+
+  animation: sparkleAnim 1s infinite alternate;
+
+}
+
+@keyframes sparkleAnim {
+
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================
+   フェード
+========================= */
+
+.fade-in {
+
+  animation: fadeIn 0.3s ease;
+
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 }
