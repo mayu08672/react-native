@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
+	// DB初期化
+	if err := src.InitDB(); err != nil {
+		log.Fatal(err)
+	}
 	// ルータ初期化
 	router := gin.Default()
 
@@ -29,9 +33,12 @@ func main() {
 		c.File(path)
 	})
 
+	src.RegisterAuthRoutes(router)
+	router.Use(src.SupabaseAuthMiddleware())
+	src.RegisterMemoRoutes(router)
+
 	// アプリケーションの実行
 	var port string = src.Config.ServerPort
-	src.RegisterAuthRoutes(router)
 	log.Println("Server started on http://localhost:" + port)
 	router.Run(":" + port)
 }

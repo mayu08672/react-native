@@ -68,5 +68,10 @@ func RegisterAuthRoutes(router *gin.Engine) {
 		Logout(authHeader[7:])
 		c.JSON(http.StatusOK, gin.H{"message": "Logout successful."})
 	})
-
+	// GitHub認証リダイレクト
+	router.GET("/api/auth/oauth2/github", func(c *gin.Context) {
+		redirectTo := baseHostURL(c)
+		githubURL := GetGithubSigninURL(redirectTo)
+		c.Redirect(http.StatusFound, githubURL)
+	})
 }
